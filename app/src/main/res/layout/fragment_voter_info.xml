@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- TODO: Add data binding node for Voter Info ViewModel -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.android.politicalpreparedness.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_electionName"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple"
+            android:padding="@dimen/default_padding"
+            android:singleLine="true"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_standard"
+                tools:text="Wisconsin Presidential Primary Election" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tv_electionDateTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_electionName" />
+
+        <TextView
+            android:id="@+id/tv_electionDateInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/halfway_margin"
+            android:fontFamily="@font/poppins"
+            app:layout_constraintBottom_toBottomOf="@id/tv_electionDateTitle"
+            app:layout_constraintStart_toEndOf="@id/tv_electionDateTitle"
+            app:layout_constraintTop_toTopOf="@id/tv_electionDateTitle"
+            tools:text="12 November 2055" />
+
+        <TextView
+            android:id="@+id/tv_stateHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_electionDateTitle"
+            tools:text="Wisconsin" />
+
+        <!-- TODO: Add click binding to open web URL -->
+        <TextView
+            android:id="@+id/tv_stateLocationsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tiny_margin"
+            android:fontFamily="@font/poppins"
+            android:text="@string/locations"
+            app:layout_constraintStart_toEndOf="@id/tv_stateHeader"
+            app:layout_constraintTop_toTopOf="@id/tv_stateHeader"
+            app:layout_constraintBottom_toBottomOf="@id/tv_stateHeader" />
+
+        <TextView
+            android:id="@+id/tv_stateLocations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:fontFamily="@font/poppins"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_stateHeader"
+            tools:text="pi pi pi po po po" />
+
+        <!-- TODO: Add click binding to open web URL -->
+        <TextView
+            android:id="@+id/tv_stateBallotTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/ballot_information"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_stateLocations" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/address_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_stateCorrespondenceHeader,tv_address" />
+
+        <TextView
+            android:id="@+id/tv_stateCorrespondenceHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_stateBallotTitle" />
+
+        <!-- TODO: Add data binding -->
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_stateCorrespondenceHeader" />
+
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/btn_followElection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:text="@string/follow_election"
+            app:layout_constraintBottom_toTopOf="@+id/tv_notice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_notice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_margin"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/follow_election_notice_message"
+            android:textColor="@color/darkPurple"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

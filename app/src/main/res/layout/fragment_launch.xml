@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/standard_margin"
+        android:paddingTop="@dimen/extra_large_margin"
+        android:paddingEnd="@dimen/standard_margin"
+        android:paddingBottom="@dimen/extra_large_margin"
+        tools:context="com.example.android.politicalpreparedness.MainActivity">
+
+        <ImageView
+            android:id="@+id/iv_voteLogo"
+            android:layout_width="0dp"
+            android:layout_height="288dp"
+            android:contentDescription="@string/vote"
+            android:src="@drawable/vote_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_upcomingElections"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:text="@string/upcoming_elections"
+            app:layout_constraintBottom_toTopOf="@id/btn_findMyRepresentatives"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_findMyRepresentatives"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:text="@string/find_my_representatives"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

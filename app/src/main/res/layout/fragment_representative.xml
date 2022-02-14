@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+
+    <!-- TODO: Add data binding node -->
+
+    <!-- TODO: Add motion scene to hide form on vertical scroll. -->
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/standard_margin"
+        app:layoutDescription="@xml/fragment_representative_scene">
+
+    <TextView
+            android:id="@+id/tv_representativesSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/representatives_search"
+            android:textColor="@color/darkBlue"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TODO: Add data binding value -->
+        <EditText
+            android:id="@+id/et_addressLine1"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="true"
+            android:hint="@string/hint_address_line_1"
+            android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_representativesSearch" />
+
+        <!-- TODO: Add data binding value -->
+        <EditText
+            android:id="@+id/et_addressLine2"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:autofillHints="true"
+            android:hint="@string/hint_address_line_2"
+            android:inputType="textPostalAddress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_addressLine1" />
+
+        <!-- TODO: Add data binding value -->
+        <EditText
+            android:id="@+id/et_city"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="true"
+            android:hint="@string/city"
+            android:inputType="textPostalAddress"
+            app:layout_constraintEnd_toStartOf="@id/spinner_state"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_addressLine2" />
+
+        <!-- TODO: Add default values from provided resources  -->
+        <!-- TODO: Add data binding value -->
+        <Spinner
+            android:id="@+id/spinner_state"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autofillHints=""
+            android:inputType="textPostalAddress"
+            app:layout_constraintBottom_toBottomOf="@id/et_city"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_city"
+            app:layout_constraintTop_toTopOf="@id/et_city" />
+
+        <!-- TODO: Add data binding value -->
+        <EditText
+            android:id="@+id/et_zipcode"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="true"
+            android:hint="@string/zipcode"
+            android:inputType="number"
+            android:maxLength="5"
+            app:layout_constraintEnd_toEndOf="@id/et_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_city" />
+
+        <Button
+            android:id="@+id/btn_search"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="@string/find_my_representatives"
+            app:layout_constraintBottom_toTopOf="@id/btn_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_zipcode" />
+
+        <Button
+            android:id="@+id/btn_location"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/use_my_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_search" />
+
+        <View
+            android:id="@+id/separator_myRepresentatives"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@color/violetGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_location" />
+
+        <TextView
+            android:id="@+id/tv_myRepresentativesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/my_representatives"
+            android:textColor="@color/darkBlue"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator_myRepresentatives" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_myRepresentatives"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_myRepresentativesTitle"
+            motion:listitem="@layout/representative_item"
+            motion:itemCount="3" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>
