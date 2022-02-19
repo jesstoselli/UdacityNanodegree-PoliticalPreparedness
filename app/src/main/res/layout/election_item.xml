@@ -1,36 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/halfway_margin"
-    android:layout_marginBottom="@dimen/halfway_margin">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_electionItemTitle"
+    <data>
+        <variable
+            name="election"
+            type="com.example.android.politicalpreparedness.data.network.models.Election" />
+
+        <variable
+            name="clickListener"
+            type="com.example.android.politicalpreparedness.election.adapter.ElectionListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/purple"
-        android:textSize="@dimen/text_standard"
-        app:layout_constraintBottom_toTopOf="@id/tv_electionItemTimeAndDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Wisconsin Presidential Primary Election" />
+        android:onClick="@{() -> clickListener.onClick(election)}"
+        android:layout_marginTop="@dimen/halfway_margin"
+        android:layout_marginBottom="@dimen/halfway_margin">
 
-    <TextView
-        android:id="@+id/tv_electionItemTimeAndDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/purple"
-        android:textSize="@dimen/text_standard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_electionItemTitle"
-        tools:text="Tue Apr 07 00:00:00 EDT 2020" />
+        <TextView
+            android:id="@+id/tv_electionItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@{election.name}"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_standard"
+            app:layout_constraintBottom_toTopOf="@id/tv_electionItemTimeAndDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Wisconsin Presidential Primary Election" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_electionItemTimeAndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@{election.electionDay.toString()}"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_standard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_electionItemTitle"
+            tools:text="Tue Apr 07 00:00:00 EDT 2020" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

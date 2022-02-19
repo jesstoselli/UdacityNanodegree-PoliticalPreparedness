@@ -1,9 +1,14 @@
 package com.example.android.politicalpreparedness.election
 
 import androidx.lifecycle.ViewModel
-import com.example.android.politicalpreparedness.database.ElectionDao
+import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.CoroutineContext
 
-class VoterInfoViewModel(private val dataSource: ElectionDao) : ViewModel() {
+class VoterInfoViewModel(
+    private val politicalPreparednessProvider: PoliticalPreparednessProvider,
+    override val coroutineContext: CoroutineContext
+) : ViewModel(), CoroutineScope {
 
     //TODO: Add live data to hold voter info
 

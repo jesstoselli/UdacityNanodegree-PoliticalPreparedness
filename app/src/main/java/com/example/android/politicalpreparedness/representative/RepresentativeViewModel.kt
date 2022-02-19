@@ -1,8 +1,14 @@
 package com.example.android.politicalpreparedness.representative
 
 import androidx.lifecycle.ViewModel
+import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.CoroutineContext
 
-class RepresentativeViewModel: ViewModel() {
+class RepresentativeViewModel(
+    private val politicalPreparednessProvider: PoliticalPreparednessProvider,
+    override val coroutineContext: CoroutineContext
+) : ViewModel(), CoroutineScope {
 
     //TODO: Establish live data for representatives and address
 
