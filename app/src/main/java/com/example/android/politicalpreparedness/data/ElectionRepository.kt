@@ -1,36 +1,44 @@
 package com.example.android.politicalpreparedness.data
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import com.example.android.politicalpreparedness.data.database.ElectionDatabase
-import com.example.android.politicalpreparedness.data.network.CivicsApi
+import com.example.android.politicalpreparedness.data.database.ElectionDao
 import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.utils.wrapEspressoIdlingResource
 
-class ElectionRepository(private val database: ElectionDatabase) {
+class ElectionRepository(private val electionDao: ElectionDao) {
 
     // Get list of elections
     suspend fun getElections(): List<Election> {
-        return database.electionDao.getElections()
+        wrapEspressoIdlingResource {
+            return electionDao.getElections()
+        }
     }
 
     // Get election by given id
     suspend fun getElectionById(id: Int): Election? {
-        return database.electionDao.getElectionById(id)
+        wrapEspressoIdlingResource {
+            return electionDao.getElectionById(id)
+        }
     }
 
     // Insert a followed election in db
     suspend fun followElection(election: Election) {
-        database.electionDao.saveElection(election)
+        wrapEspressoIdlingResource {
+            electionDao.saveElection(election)
+        }
     }
 
     // Remove election from db
     suspend fun unfollowElection(id: Int) {
-        return database.electionDao.deleteSingleElection(id)
+        wrapEspressoIdlingResource {
+            return electionDao.deleteSingleElection(id)
+        }
     }
 
     // Clear elections from db
     suspend fun unfollowAllElections() {
-        return database.electionDao.deleteAll()
+        wrapEspressoIdlingResource {
+            return electionDao.deleteAll()
+        }
     }
 
 //    // Refresh election data
@@ -39,7 +47,7 @@ class ElectionRepository(private val database: ElectionDatabase) {
 //            val client = CivicsApi.retrofitService
 //            val electionsListResponse = client.getElections().elections
 //            electionsListResponse.forEach { election ->
-//                database.electionDao.saveElection(election)
+//                electionDao.saveElection(election)
 //            }
 //        } catch (e: Exception) {
 //            Log.d(TAG, e.message.toString())

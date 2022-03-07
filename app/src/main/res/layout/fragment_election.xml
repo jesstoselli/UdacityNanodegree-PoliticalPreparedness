@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/upcoming_elections"
+            app:layout_constraintBottom_toTopOf="@id/rv_upcomingElections"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +32,11 @@
             android:id="@+id/rv_upcomingElections"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_upcomingElections"
+            app:listData="@{electionsViewModel.upcomingElections}"
             tools:itemCount="3"
             tools:listitem="@layout/election_item" />
 
@@ -62,9 +65,11 @@
             android:id="@+id/rv_savedElections"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_savedElections"
+            app:listData="@{electionsViewModel.savedElections}"
             tools:itemCount="2"
             tools:listitem="@layout/election_item" />
 

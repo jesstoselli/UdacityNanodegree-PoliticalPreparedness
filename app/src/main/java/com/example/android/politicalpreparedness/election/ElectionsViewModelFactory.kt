@@ -6,13 +6,13 @@ import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvi
 import kotlin.coroutines.CoroutineContext
 
 class ElectionsViewModelFactory(
-    private val politicalPreparednessProvider: PoliticalPreparednessProvider,
-    private val coroutineContext: CoroutineContext
+    private val politicalPreparednessProvider: PoliticalPreparednessProvider
 ) : ViewModelProvider.Factory {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ElectionsViewModel::class.java)) {
-            return ElectionsViewModel(politicalPreparednessProvider, coroutineContext) as T
+            return ElectionsViewModel(politicalPreparednessProvider) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -9,7 +9,7 @@ import com.example.android.politicalpreparedness.data.network.models.Election
 import com.example.android.politicalpreparedness.databinding.ElectionItemBinding
 
 class ElectionListAdapter(private val clickListener: ElectionListener) :
-    ListAdapter<Election, ElectionListAdapter.ElectionViewHolder>(ElectionDiffCallback) {
+    ListAdapter<Election, ElectionListAdapter.ElectionViewHolder>(ElectionDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElectionViewHolder {
         return ElectionViewHolder.from(parent)
@@ -20,8 +20,7 @@ class ElectionListAdapter(private val clickListener: ElectionListener) :
         holder.bind(electionItem, clickListener)
     }
 
-    class ElectionViewHolder(private val binding: ElectionItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ElectionViewHolder(private val binding: ElectionItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(election: Election, listener: ElectionListener) {
             binding.election = election
@@ -37,19 +36,26 @@ class ElectionListAdapter(private val clickListener: ElectionListener) :
             }
         }
     }
+}
 
-    companion object ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {
-        override fun areItemsTheSame(oldItem: Election, newItem: Election): Boolean {
-            return oldItem == newItem
-        }
+class ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {
+    override fun areItemsTheSame(oldItem: Election, newItem: Election): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-        override fun areContentsTheSame(oldItem: Election, newItem: Election): Boolean {
-            return oldItem.id == newItem.id
-        }
-
+    override fun areContentsTheSame(oldItem: Election, newItem: Election): Boolean {
+        return oldItem == newItem
     }
 }
 
 class ElectionListener(val clickListener: (Election) -> Unit) {
     fun onClick(election: Election) = clickListener(election)
 }
+
+//    var elections: List<Election> = emptyList()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
+//
+//    override fun getItemCount(): Int = elections.size

@@ -25,9 +25,9 @@ To get started with this project, simply pull the repository and import the proj
 
 ## Getting Started
 
-* For the most part, the TODOs in the project will guide you through getting the project completed. There is a general package architecture and *most* files are present. 
-* Hints are provided for tricky parts of the application that may extend beyond basic Android development skills.
-* As databinding is integral to the project architecture, it is important to be familiar with the IDE features such s cleaning and rebuilding the project as well as invalidating caches. 
+1. Go to [Google Cloud Console](https://console.cloud.google.com/), create a project, and generate an Civics API Key
+2. Paste the API Key in gradle.properties file
+3. Sync with Gradle
 
 ## Suggested Workflow
 

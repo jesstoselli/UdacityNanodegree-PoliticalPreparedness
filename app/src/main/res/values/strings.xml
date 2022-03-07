@@ -6,9 +6,10 @@
     <string name="find_my_representatives">FIND MY REPRESENTATIVES</string>
     <string name="saved_elections">SAVED ELECTIONS</string>
     <string name="follow_election">FOLLOW ELECTION</string>
-    <string name="follow_election_notice_message">Please notice that clicking any of the links in the election information section will redirect you to your default browser.</string>
+    <string name="follow_election_notice_message">Please notice that clicking any of the buttons in the election information section will redirect you to your default browser.</string>
+    <string name="name">Name:</string>
     <string name="date">Date:</string>
-    <string name="locations">locations:</string>
+    <string name="voting_locations">voting locations</string>
     <string name="ballot_information">Ballot Information</string>
     <string name="representatives_search">REPRESENTATIVES SEARCH</string>
     <string name="hint_address_line_1">Address Line 1</string>
@@ -23,5 +24,6 @@
     <string name="accessibility_website_link">Website Link</string>
     <string name="accessibility_facebook_link">Facebook link</string>
     <string name="accessibility_twitter_link">Twitter link</string>
+    <string name="election_info">Election Information</string>
 
 </resources>

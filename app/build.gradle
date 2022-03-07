@@ -17,6 +17,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", "API_KEY", API_KEY)
     }
     buildTypes {
         release {
@@ -38,6 +40,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "androidx.test.espresso:espresso-idling-resource:$version_espresso"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$version_espresso"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
@@ -62,6 +67,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     // Moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
@@ -71,6 +77,10 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
+
+    // Koin
+    implementation "org.koin:koin-android:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
 
     //Room
     implementation "androidx.room:room-runtime:$version_room"

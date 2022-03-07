@@ -30,6 +30,12 @@
         <item name="android:layout_height">40dp</item>
     </style>
 
+    <style name="SmallButtonStyle" parent="MediumStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/round_corners_blue</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
     <style name="HeaderStyle" parent="MediumStyle">
         <item name="android:textColor">@color/darkBlue</item>
     </style>

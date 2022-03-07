@@ -6,9 +6,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 
 class RepresentativeViewModel(
-    private val politicalPreparednessProvider: PoliticalPreparednessProvider,
-    override val coroutineContext: CoroutineContext
-) : ViewModel(), CoroutineScope {
+    private val politicalPreparednessProvider: PoliticalPreparednessProvider
+) : ViewModel() {
 
     //TODO: Establish live data for representatives and address
 

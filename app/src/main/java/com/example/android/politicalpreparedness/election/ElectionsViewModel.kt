@@ -1,19 +1,17 @@
 package com.example.android.politicalpreparedness.election
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvider
 import com.example.android.politicalpreparedness.data.network.models.Election
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class ElectionsViewModel(
-    private val politicalPreparednessProvider: PoliticalPreparednessProvider,
-    override val coroutineContext: CoroutineContext
-) : ViewModel(), CoroutineScope {
+    private val politicalPreparednessProvider: PoliticalPreparednessProvider
+) : ViewModel() {
 
     private val _upcomingElections = MutableLiveData<List<Election>>()
     val upcomingElections: LiveData<List<Election>>
@@ -28,6 +26,7 @@ class ElectionsViewModel(
         get() = _navigateToVoterInfoFragment
 
     init {
+        Log.d(TAG, "Loaded properly")
         getUpcomingElectionsFromAPI()
         getFollowedElectionsFromDatabase()
     }
@@ -40,6 +39,9 @@ class ElectionsViewModel(
         _navigateToVoterInfoFragment.value = null
     }
 
+    fun refreshElectionData() {
+        getFollowedElectionsFromDatabase()
+    }
 
     private fun getUpcomingElectionsFromAPI() {
         viewModelScope.launch {
@@ -53,5 +55,9 @@ class ElectionsViewModel(
             val electionsList = politicalPreparednessProvider.getFollowedElectionsFromDatabase()
             _savedElections.value = electionsList
         }
+    }
+
+    companion object {
+        const val TAG = "ElectionsViewModel"
     }
 }
