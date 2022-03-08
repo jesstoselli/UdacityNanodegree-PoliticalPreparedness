@@ -45,8 +45,8 @@
             app:argType="string" />
         <argument
             android:name="arg_division"
-            app:argType="string" />
-<!--            app:argType="com.example.android.politicalpreparedness.data.network.models.Division" />-->
+            app:argType="com.example.android.politicalpreparedness.data.network.models.Division" />
+<!--            app:argType="Division" />-->
     </fragment>
 
 </navigation>

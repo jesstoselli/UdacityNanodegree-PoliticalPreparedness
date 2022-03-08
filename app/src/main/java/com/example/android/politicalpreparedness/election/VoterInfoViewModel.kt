@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvider
 import com.example.android.politicalpreparedness.data.network.models.AdministrationBody
+import com.example.android.politicalpreparedness.data.network.models.Division
 import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.data.network.models.VoterInfo
+import com.example.android.politicalpreparedness.utils.ApiStatus
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class VoterInfoViewModel(
     private val politicalPreparednessProvider: PoliticalPreparednessProvider,
@@ -30,7 +34,9 @@ class VoterInfoViewModel(
     val isFollowed: LiveData<Boolean>
         get() = _isFollowed
 
-    //TODO: Add var and methods to populate voter info
+    private val _apiStatus = MutableLiveData<ApiStatus>()
+    val apiStatus: LiveData<ApiStatus>
+        get() = _apiStatus
 
     //TODO: Add var and methods to support loading URLs
 
@@ -42,6 +48,33 @@ class VoterInfoViewModel(
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
 
+    fun retrieveVoterInfo(electionId: Int, division: Division) {
+//        _apiStatus.value = CivicsApiStatus.LOADING
+
+        viewModelScope.launch {
+            try {
+                val isElectionAlreadyFollowed = politicalPreparednessProvider.getElectionById(electionId)
+                _isFollowed.value = isElectionAlreadyFollowed != null
+
+                val voterAddress = "${division.state}, ${division.country}"
+
+                val retrievedVoterInfo = if (division.state.isEmpty()) {
+                    politicalPreparednessProvider.getVoterInfo(electionId, division.country)
+                } else {
+                    politicalPreparednessProvider.getVoterInfo(electionId, voterAddress)
+                }
+
+                _chosenElection.value = retrievedVoterInfo.election
+                _administrationBody.value = retrievedVoterInfo.state?.first()?.electionAdministrationBody
+
+                _apiStatus.value = ApiStatus.DONE
+            } catch (e: Exception) {
+                _apiStatus.value = ApiStatus.ERROR
+            }
+        }
+    }
+
+    // Called from the xml with databinding
     fun followUnfollowElection() {
         viewModelScope.launch {
             _chosenElection.value?.let {
@@ -57,11 +90,10 @@ class VoterInfoViewModel(
     }
 
     fun openLinkOnBrowser(url: String) {
-        _url.value = url
+        _url.postValue(url)
     }
 
-//    fun navigateToUrlCompleted() {
-//        _url.value = null
-//    }
-
+    fun returnFromBrowser() {
+        _url.postValue(null)
+    }
 }

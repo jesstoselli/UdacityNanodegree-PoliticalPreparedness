@@ -17,16 +17,6 @@ class ElectionsFragment : Fragment() {
 
     private val viewModel: ElectionsViewModel by inject()
 
-//    private val civicsApi = CivicsApi.retrofitService
-//    private val electionDao = ElectionDatabase.getInstance(requireContext()).electionDao
-//    private val electionRepository = ElectionRepository(electionDao)
-//
-//    private val politicalPreparednessProvider = PoliticalPreparednessProvider(electionRepository, civicsApi)
-//
-//    private val viewModel by viewModels<ElectionsViewModel> {
-//        ElectionsViewModelFactory(politicalPreparednessProvider)
-//    }
-
     private lateinit var binding: FragmentElectionBinding
 
     override fun onCreateView(
@@ -75,4 +65,7 @@ class ElectionsFragment : Fragment() {
         viewModel.refreshElectionData()
     }
 
+    companion object {
+        const val TAG = "ElectionsFragment"
+    }
 }

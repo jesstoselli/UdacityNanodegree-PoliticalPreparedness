@@ -61,9 +61,5 @@ class RetrofitProvider(
             it.proceed(request)
         }
     }
-
-//    companion object {
-//        const val API_KEY = "AIzaSyBavrLrn5l6ndMvzCAmygq2zymBBdWD90Y" //TODO: Remove API Key and add info to README.md
-//    }
 }
 

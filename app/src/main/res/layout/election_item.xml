@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="election"
             type="com.example.android.politicalpreparedness.data.network.models.Election" />
@@ -14,15 +15,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> clickListener.onClick(election)}"
         android:layout_marginTop="@dimen/halfway_margin"
-        android:layout_marginBottom="@dimen/halfway_margin">
+        android:layout_marginBottom="@dimen/halfway_margin"
+        android:onClick="@{() -> clickListener.onClick(election)}">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_electionItemTitle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="@{election.name}"
@@ -34,9 +35,9 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Wisconsin Presidential Primary Election" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_electionItemTimeAndDate"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="@{election.electionDay.toString()}"

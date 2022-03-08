@@ -6,6 +6,7 @@
     <string name="find_my_representatives">FIND MY REPRESENTATIVES</string>
     <string name="saved_elections">SAVED ELECTIONS</string>
     <string name="follow_election">FOLLOW ELECTION</string>
+    <string name="unfollow_election">UNFOLLOW ELECTION</string>
     <string name="follow_election_notice_message">Please notice that clicking any of the buttons in the election information section will redirect you to your default browser.</string>
     <string name="name">Name:</string>
     <string name="date">Date:</string>

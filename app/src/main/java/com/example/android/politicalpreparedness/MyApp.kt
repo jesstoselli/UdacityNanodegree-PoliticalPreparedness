@@ -26,11 +26,11 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val coroutineContextProviderModule = module {
-            single<CoroutineContextProvider> {
-                CoroutineContextProvider.Default()
-            }
-        }
+//        val coroutineContextProviderModule = module {
+//            single<CoroutineContextProvider> {
+//                CoroutineContextProvider.Default()
+//            }
+//        }
 
         val viewModelModule = module {
             viewModel { ElectionsViewModel(get()) }
@@ -44,16 +44,22 @@ class MyApp : Application() {
             single { ElectionDatabase.getInstance(this@MyApp).electionDao }
         }
 
+        val moshi = Moshi.Builder()
+            .add(ElectionAdapter())
+            .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
         val networkModule = module {
+//            single {
+//                Moshi.Builder()
+//                    .add(ElectionAdapter())
+//                    .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+//                    .add(KotlinJsonAdapterFactory())
+//                    .build()
+//            }
             single {
-                Moshi.Builder()
-                    .add(ElectionAdapter())
-                    .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
-                    .add(KotlinJsonAdapterFactory())
-                    .build()
-            }
-            single {
-                RetrofitProvider(get(), API_BASE_URL).provide()
+                RetrofitProvider(moshi, API_BASE_URL).provide()
             }
             single {
                 get<Retrofit>().create(CivicsApiService::class.java)

@@ -20,33 +20,13 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar_electionName"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/purple"-->
-<!--            android:padding="@dimen/default_padding"-->
-<!--            android:singleLine="true"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv_toolbarTitle"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/poppins_medium"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="@dimen/text_standard"-->
-<!--                tools:text="Wisconsin Presidential Primary Election" />-->
-
-<!--        </androidx.appcompat.widget.Toolbar>-->
-
         <LinearLayout
             android:id="@+id/ll_nameHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkPurple"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="@dimen/standard_margin"
             android:paddingBottom="@dimen/standard_margin"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,41 +44,6 @@
 
         </LinearLayout>
 
-
-        <!--        <TextView-->
-<!--            android:id="@+id/tv_electionNameInfo"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/halfway_margin"-->
-<!--            android:fontFamily="@font/poppins"-->
-<!--            android:text="@{voterInfoViewModel.chosenElection.name}"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/tv_electionNameTitle"-->
-<!--            app:layout_constraintStart_toEndOf="@id/tv_electionNameTitle"-->
-<!--            app:layout_constraintTop_toTopOf="@id/tv_electionNameTitle"-->
-<!--            tools:text="WTF is name?" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_electionDateTitle"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/standard_margin"-->
-<!--            android:layout_marginTop="@dimen/standard_margin"-->
-<!--            android:fontFamily="@font/poppins_medium"-->
-<!--            android:text="@string/date"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_electionNameTitle" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_electionDateInfo"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/halfway_margin"-->
-<!--            android:fontFamily="@font/poppins"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/tv_electionDateTitle"-->
-<!--            app:layout_constraintStart_toEndOf="@id/tv_electionDateTitle"-->
-<!--            app:layout_constraintTop_toTopOf="@id/tv_electionDateTitle"-->
-<!--            tools:text="12 November 2055" />-->
-
         <TextView
             android:id="@+id/tv_electionDateInfo"
             android:layout_width="0dp"
@@ -106,10 +51,11 @@
             android:layout_marginTop="@dimen/halfway_margin"
             android:fontFamily="@font/poppins"
             android:textAlignment="center"
+            android:text="@{voterInfoViewModel.chosenElection.electionDay.toLocaleString()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_nameHeader"
-            tools:text="12 November 2055" />
+            tools:text="12 November 2025" />
 
         <LinearLayout
             android:id="@+id/ll_electionInfoHeader"
@@ -117,8 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_margin"
             android:background="@color/darkBlue"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingTop="@dimen/small_margin"
             android:paddingBottom="@dimen/small_margin"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,19 +81,7 @@
 
         </LinearLayout>
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_state"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/standard_margin"-->
-<!--            android:layout_marginTop="@dimen/standard_margin"-->
-<!--            android:fontFamily="@font/poppins_medium"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/ll_electionInfoHeader"-->
-<!--            tools:text="WISCONSIN" />-->
-
-        <!-- TODO: Add click binding to open web URL -->
+        <!-- DONE: Add click binding to open web URL -->
         <Button
             android:id="@+id/btn_votingLocations"
             android:layout_width="200dp"
@@ -156,9 +90,10 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:background="@drawable/round_corners_blue"
             android:fontFamily="@font/poppins"
-            android:text="@string/voting_locations"
             android:onClick="@{() -> voterInfoViewModel.openLinkOnBrowser(voterInfoViewModel.administrationBody.votingLocationFinderUrl)}"
+            android:text="@string/voting_locations"
             android:textColor="@color/white"
+            android:visibility="@{TextUtils.isEmpty(voterInfoViewModel.administrationBody.votingLocationFinderUrl) ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_electionInfoHeader" />
@@ -174,39 +109,41 @@
             android:onClick="@{() -> voterInfoViewModel.openLinkOnBrowser(voterInfoViewModel.administrationBody.ballotInfoUrl)}"
             android:text="@string/ballot_information"
             android:textColor="@color/white"
+            android:visibility="@{TextUtils.isEmpty(voterInfoViewModel.administrationBody.ballotInfoUrl) ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_votingLocations" />
 
-<!--        <androidx.constraintlayout.widget.Group-->
-<!--            android:id="@+id/address_group"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:constraint_referenced_ids="tv_stateCorrespondenceHeader,tv_address" />-->
+        <!--        <androidx.constraintlayout.widget.Group-->
+        <!--            android:id="@+id/address_group"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:constraint_referenced_ids="tv_stateCorrespondenceHeader,tv_address" />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_stateCorrespondenceHeader"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_stateBallotTitle" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_stateCorrespondenceHeader"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_stateBallotTitle" />-->
 
-        <!-- TODO: Add data binding -->
-<!--        <TextView-->
-<!--            android:id="@+id/tv_address"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_stateCorrespondenceHeader" />-->
+        <!-- DONE: Add data binding -->
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_address"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/tv_electionDateTitle"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tv_stateCorrespondenceHeader" />-->
 
         <Button
-            style="@style/ButtonStyle"
             android:id="@+id/btn_followElection"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:layout_marginBottom="@dimen/standard_margin"
+            android:onClick="@{() -> voterInfoViewModel.followUnfollowElection()}"
             android:text="@string/follow_election"
             app:layout_constraintBottom_toTopOf="@+id/tv_notice"
             app:layout_constraintEnd_toEndOf="parent"

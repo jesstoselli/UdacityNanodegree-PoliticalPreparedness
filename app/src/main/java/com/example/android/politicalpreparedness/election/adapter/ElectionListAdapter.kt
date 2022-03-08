@@ -51,11 +51,3 @@ class ElectionDiffCallback : DiffUtil.ItemCallback<Election>() {
 class ElectionListener(val clickListener: (Election) -> Unit) {
     fun onClick(election: Election) = clickListener(election)
 }
-
-//    var elections: List<Election> = emptyList()
-//        set(value) {
-//            field = value
-//            notifyDataSetChanged()
-//        }
-//
-//    override fun getItemCount(): Int = elections.size
