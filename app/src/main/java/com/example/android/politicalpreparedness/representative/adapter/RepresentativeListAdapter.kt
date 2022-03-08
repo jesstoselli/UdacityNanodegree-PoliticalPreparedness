@@ -100,6 +100,6 @@ class RepresentativeListAdapter :
 
 }
 
-class RepresentativeListener(val clickListener: (Representative) -> Unit) {
-    fun onClick(representative: Representative) = clickListener(representative)
-}
+//class RepresentativeListener(val clickListener: (Representative) -> Unit) {
+//    fun onClick(representative: Representative) = clickListener(representative)
+//}

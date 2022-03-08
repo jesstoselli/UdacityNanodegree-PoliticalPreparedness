@@ -16,9 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/standard_margin"
-        app:layoutDescription="@xml/fragment_representative_scene">
+        app:layoutDescription="@xml/fragment_representative_scene"
+        app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
-    <TextView
+        <TextView
             android:id="@+id/tv_representativesSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +30,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Add data binding value -->
         <EditText
             android:id="@+id/et_addressLine1"
             style="@style/EditTextStyle"
@@ -38,10 +38,10 @@
             android:autofillHints="true"
             android:hint="@string/hint_address_line_1"
             android:inputType="textPostalAddress"
+            android:text="@{representativeViewModel.representativeAddress.line1}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_representativesSearch" />
 
-        <!-- TODO: Add data binding value -->
         <EditText
             android:id="@+id/et_addressLine2"
             style="@style/EditTextStyle"
@@ -50,10 +50,10 @@
             android:autofillHints="true"
             android:hint="@string/hint_address_line_2"
             android:inputType="textPostalAddress"
+            android:text="@{representativeViewModel.representativeAddress.line2}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_addressLine1" />
 
-        <!-- TODO: Add data binding value -->
         <EditText
             android:id="@+id/et_city"
             style="@style/EditTextStyle"
@@ -62,24 +62,24 @@
             android:autofillHints="true"
             android:hint="@string/city"
             android:inputType="textPostalAddress"
+            android:text="@{representativeViewModel.representativeAddress.city}"
             app:layout_constraintEnd_toStartOf="@id/spinner_state"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_addressLine2" />
 
-        <!-- TODO: Add default values from provided resources  -->
-        <!-- TODO: Add data binding value -->
         <Spinner
             android:id="@+id/spinner_state"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:autofillHints=""
+            android:entries="@array/states"
             android:inputType="textPostalAddress"
             app:layout_constraintBottom_toBottomOf="@id/et_city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/et_city"
-            app:layout_constraintTop_toTopOf="@id/et_city" />
+            app:layout_constraintTop_toTopOf="@id/et_city"
+            app:stateValue="@{representativeViewModel.representativeAddress.state}" />
 
-        <!-- TODO: Add data binding value -->
         <EditText
             android:id="@+id/et_zipcode"
             style="@style/EditTextStyle"
@@ -89,6 +89,7 @@
             android:hint="@string/zipcode"
             android:inputType="number"
             android:maxLength="5"
+            android:text="@{representativeViewModel.representativeAddress.zip}"
             app:layout_constraintEnd_toEndOf="@id/et_city"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_city" />
@@ -145,8 +146,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_myRepresentativesTitle"
-            motion:listitem="@layout/representative_item"
-            motion:itemCount="3" />
+            motion:itemCount="3"
+            motion:listitem="@layout/representative_item" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
