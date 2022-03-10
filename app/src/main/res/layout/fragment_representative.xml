@@ -11,13 +11,12 @@
 
     </data>
 
-    <!-- TODO: Add motion scene to hide form on vertical scroll. -->
+    <!-- DONE: Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/standard_margin"
-        app:layoutDescription="@xml/fragment_representative_scene"
-        app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+        app:layoutDescription="@xml/fragment_representative_scene">
 
         <TextView
             android:id="@+id/tv_representativesSearch"
@@ -139,13 +138,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/separator_myRepresentatives" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/tv_loadingInfo"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/medium_margin"-->
+<!--            android:fontFamily="@font/poppins"-->
+<!--            android:text="@string/representatives_list_loading_info"-->
+<!--            android:textColor="@color/darkPurple"-->
+<!--            android:visibility="gone"-->
+<!--            android:textAlignment="center"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_myRepresentativesTitle" />-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_myRepresentatives"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_myRepresentativesTitle"
+            app:representativeList="@{representativeViewModel.representatives}"
             motion:itemCount="3"
             motion:listitem="@layout/representative_item" />
 

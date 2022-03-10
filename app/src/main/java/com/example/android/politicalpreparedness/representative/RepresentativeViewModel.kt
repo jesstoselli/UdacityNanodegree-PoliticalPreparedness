@@ -59,8 +59,7 @@ class RepresentativeViewModel(
         }
     }
 
-    //TODO: Create function get address from geo location
-//    fun getRepresentativesFromLocation() {
-//
-//    }
+    fun setAddress(address: Address) {
+        _representativeAddress.postValue(address)
+    }
 }

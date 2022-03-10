@@ -26,5 +26,6 @@
     <string name="accessibility_facebook_link">Facebook link</string>
     <string name="accessibility_twitter_link">Twitter link</string>
     <string name="election_info">Election Information</string>
+    <string name="representatives_list_loading_info">A list of your representatives will be shown here.</string>
 
 </resources>

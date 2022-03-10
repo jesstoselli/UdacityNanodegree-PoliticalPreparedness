@@ -43,7 +43,6 @@ class PoliticalPreparednessProvider(
         return voterInfoResponse.toDomainModel()
     }
 
-    // TODO: Check if this is the correct model to return
     // Representatives
     suspend fun getRepresentativesList(address: String): RepresentativeResponse {
         return civicsApiService.getRepresentativesInfoByAddress(address)

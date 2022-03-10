@@ -48,20 +48,5 @@ class VoterInfoFragment : Fragment() {
 
         return binding.root
 
-
-        //TODO: Populate voter info -- hide views without provided data.
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-         */
-
-
-        //TODO: Handle loading of URLs
-
-        //TODO: Handle save button UI state
-        //TODO: cont'd Handle save button clicks
-
     }
-
-    //TODO: Create method to load URL intents
-
 }
