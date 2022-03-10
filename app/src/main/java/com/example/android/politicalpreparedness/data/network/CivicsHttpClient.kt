@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.data.network
 
+import com.example.android.politicalpreparedness.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -7,7 +8,7 @@ class CivicsHttpClient : OkHttpClient() {
 
     companion object {
 
-        const val API_KEY = "AIzaSyBavrLrn5l6ndMvzCAmygq2zymBBdWD90Y" //TODO: Remove API Key and add info to README.md
+//        const val API_KEY = ""
 
         private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 
@@ -19,7 +20,7 @@ class CivicsHttpClient : OkHttpClient() {
                     val url = original
                         .url
                         .newBuilder()
-                        .addQueryParameter("key", API_KEY)
+                        .addQueryParameter("key", BuildConfig.API_KEY)
                         .build()
                     val request = original
                         .newBuilder()
