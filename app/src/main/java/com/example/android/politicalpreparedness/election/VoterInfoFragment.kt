@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import com.example.android.politicalpreparedness.utils.ApiStatus
 import org.koin.android.ext.android.inject
 
 class VoterInfoFragment : Fragment() {
@@ -43,6 +44,41 @@ class VoterInfoFragment : Fragment() {
                 binding.btnFollowElection.text = requireContext().resources.getString(R.string.unfollow_election)
             } else {
                 binding.btnFollowElection.text = requireContext().resources.getString(R.string.follow_election)
+            }
+        })
+
+        viewModel.basicInfo.observe(viewLifecycleOwner, Observer {
+            with(binding) {
+                tvElectionNameTitle.text = it.name
+                tvElectionDateInfo.text = it.date
+            }
+        })
+
+        viewModel.apiStatus.observe(viewLifecycleOwner, Observer { apiStatus ->
+            with(binding) {
+                when (apiStatus) {
+                    ApiStatus.DONE -> {
+                        rlLoadingPanel.visibility = View.GONE
+                        btnStateBallot.visibility = View.VISIBLE
+                        btnVotingLocations.visibility = View.VISIBLE
+//                        tvElectionDateInfo.visibility = View.VISIBLE
+                        tvNoNetwork.visibility = View.GONE
+                    }
+                    ApiStatus.ERROR -> {
+                        rlLoadingPanel.visibility = View.GONE
+                        btnStateBallot.visibility = View.GONE
+                        btnVotingLocations.visibility = View.GONE
+//                        tvElectionDateInfo.visibility = View.GONE
+                        tvNoNetwork.visibility = View.VISIBLE
+                    }
+                    ApiStatus.LOADING -> {
+                        rlLoadingPanel.visibility = View.VISIBLE
+                        btnStateBallot.visibility = View.GONE
+                        btnVotingLocations.visibility = View.GONE
+//                        tvElectionDateInfo.visibility = View.GONE
+                        tvNoNetwork.visibility = View.GONE
+                    }
+                }
             }
         })
 

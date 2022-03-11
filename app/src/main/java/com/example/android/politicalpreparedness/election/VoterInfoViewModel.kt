@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.election
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,10 +9,8 @@ import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvi
 import com.example.android.politicalpreparedness.data.network.models.AdministrationBody
 import com.example.android.politicalpreparedness.data.network.models.Division
 import com.example.android.politicalpreparedness.data.network.models.Election
-import com.example.android.politicalpreparedness.data.network.models.VoterInfo
 import com.example.android.politicalpreparedness.utils.ApiStatus
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class VoterInfoViewModel(
     private val politicalPreparednessProvider: PoliticalPreparednessProvider,
@@ -38,18 +37,31 @@ class VoterInfoViewModel(
     val apiStatus: LiveData<ApiStatus>
         get() = _apiStatus
 
+    private val _basicInfo = MutableLiveData<BasicInfo>()
+    val basicInfo: LiveData<BasicInfo>
+        get() = _basicInfo
+
+    init {
+        _apiStatus.value = ApiStatus.LOADING
+    }
 
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
      */
 
     fun retrieveVoterInfo(electionId: Int, division: Division) {
-//        _apiStatus.value = CivicsApiStatus.LOADING
 
         viewModelScope.launch {
             try {
                 val isElectionAlreadyFollowed = politicalPreparednessProvider.getElectionById(electionId)
                 _isFollowed.value = isElectionAlreadyFollowed != null
+
+                if (isElectionAlreadyFollowed != null) {
+                    _basicInfo.value = BasicInfo(
+                        name = isElectionAlreadyFollowed.name,
+                        date = isElectionAlreadyFollowed.electionDay.toLocaleString()
+                    )
+                }
 
                 val voterAddress = "${division.state}, ${division.country}"
 
@@ -60,10 +72,14 @@ class VoterInfoViewModel(
                 }
 
                 _chosenElection.value = retrievedVoterInfo.election
+                Log.d(TAG, chosenElection.value.toString())
                 _administrationBody.value = retrievedVoterInfo.state?.first()?.electionAdministrationBody
 
                 _apiStatus.value = ApiStatus.DONE
             } catch (e: Exception) {
+                val message =
+                    if (e.localizedMessage.isNullOrEmpty()) "Something went wrong while loading data." else e.localizedMessage
+                Log.e(ElectionsViewModel.TAG, message)
                 _apiStatus.value = ApiStatus.ERROR
             }
         }
@@ -88,7 +104,7 @@ class VoterInfoViewModel(
         _url.postValue(url)
     }
 
-    fun returnFromBrowser() {
-        _url.postValue(null)
+    companion object {
+        const val TAG = "VoterInfoViewModel"
     }
 }

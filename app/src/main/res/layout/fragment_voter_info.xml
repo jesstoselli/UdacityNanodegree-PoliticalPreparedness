@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/halfway_margin"
             android:fontFamily="@font/poppins"
-            android:textAlignment="center"
             android:text="@{voterInfoViewModel.chosenElection.electionDay.toLocaleString()}"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_nameHeader"
@@ -80,6 +80,38 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_loadingPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_followElection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_electionInfoHeader">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_noNetwork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:fontFamily="@font/poppins"
+            android:gravity="center_horizontal"
+            android:text="@string/connection_error"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_standard"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_electionInfoHeader" />
 
         <!-- DONE: Add click binding to open web URL -->
         <Button

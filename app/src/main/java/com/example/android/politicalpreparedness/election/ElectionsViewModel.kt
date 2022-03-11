@@ -7,11 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvider
 import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.utils.ApiStatus
 import kotlinx.coroutines.launch
 
 class ElectionsViewModel(
     private val politicalPreparednessProvider: PoliticalPreparednessProvider
 ) : ViewModel() {
+
+    private val _apiStatus = MutableLiveData<ApiStatus>()
+    val apiStatus: LiveData<ApiStatus>
+        get() = _apiStatus
 
     private val _upcomingElections = MutableLiveData<List<Election>>()
     val upcomingElections: LiveData<List<Election>>
@@ -27,6 +32,7 @@ class ElectionsViewModel(
 
     init {
         Log.d(TAG, "Loaded properly")
+        _apiStatus.value = ApiStatus.LOADING
         getUpcomingElectionsFromAPI()
         getFollowedElectionsFromDatabase()
     }
@@ -44,9 +50,20 @@ class ElectionsViewModel(
     }
 
     private fun getUpcomingElectionsFromAPI() {
+//        _apiStatus.value = ApiStatus.LOADING
         viewModelScope.launch {
-            val electionsList = politicalPreparednessProvider.getElectionsFromAPI()
-            _upcomingElections.value = electionsList
+            try {
+                val electionsList = politicalPreparednessProvider.getElectionsFromAPI()
+                _apiStatus.value = ApiStatus.DONE
+                _upcomingElections.value = electionsList
+
+            } catch (e: Exception) {
+                val message =
+                    if (e.localizedMessage.isNullOrEmpty()) "Something went wrong while loading data." else e.localizedMessage
+                Log.e(TAG, message)
+                _apiStatus.value = ApiStatus.ERROR
+                _upcomingElections.value = emptyList()
+            }
         }
     }
 

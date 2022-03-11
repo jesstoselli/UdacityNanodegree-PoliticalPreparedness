@@ -11,6 +11,8 @@ import com.example.android.politicalpreparedness.data.network.models.Election
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 import com.example.android.politicalpreparedness.election.adapter.ElectionListener
+import com.example.android.politicalpreparedness.utils.ApiStatus
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
 class ElectionsFragment : Fragment() {
@@ -45,6 +47,28 @@ class ElectionsFragment : Fragment() {
             if (it != null) {
                 navigateToVoterInfoFragment(it)
                 viewModel.returnFromVoterInfoFragment()
+            }
+        })
+
+        viewModel.apiStatus.observe(viewLifecycleOwner, Observer { apiStatus ->
+            with(binding) {
+                when (apiStatus) {
+                    ApiStatus.DONE -> {
+                        tvNoNetwork.visibility = View.GONE
+                        rlLoadingPanel.visibility = View.GONE
+                        rvUpcomingElections.visibility = View.VISIBLE
+                    }
+                    ApiStatus.ERROR -> {
+                        rlLoadingPanel.visibility = View.GONE
+                        rvUpcomingElections.visibility = View.GONE
+                        tvNoNetwork.visibility = View.VISIBLE
+                    }
+                    ApiStatus.LOADING -> {
+                        rvUpcomingElections.visibility = View.GONE
+                        tvNoNetwork.visibility = View.GONE
+                        rlLoadingPanel.visibility = View.VISIBLE
+                    }
+                }
             }
         })
 

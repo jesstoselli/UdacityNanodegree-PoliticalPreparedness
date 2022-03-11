@@ -75,7 +75,7 @@ class RepresentativeFragment : Fragment() {
 //        }
 //    }
 
-    private fun snackBarComposer(field: String) {
+    private fun snackBarInfoComposer(field: String) {
         Snackbar.make(requireView(), "The field $field must be filled.", Snackbar.LENGTH_LONG).show()
     }
 
@@ -86,9 +86,9 @@ class RepresentativeFragment : Fragment() {
         val state = binding.spinnerState.selectedItem.toString()
         val zipCode = binding.etZipcode.text.toString()
 
-        if (line1.isEmpty()) snackBarComposer(line1)
-        if (city.isEmpty()) snackBarComposer(city)
-        if (zipCode.isEmpty()) snackBarComposer(zipCode)
+        if (line1.isEmpty()) snackBarInfoComposer(line1)
+        if (city.isEmpty()) snackBarInfoComposer(city)
+        if (zipCode.isEmpty()) snackBarInfoComposer(zipCode)
 
         enteredAddress = Address(line1, line2, city, state, zipCode)
     }

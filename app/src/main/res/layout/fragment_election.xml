@@ -17,12 +17,14 @@
         android:padding="@dimen/standard_margin"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-<!--        <androidx.constraintlayout.widget.Guideline-->
-<!--            android:id="@+id/guideline"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintGuide_percent="0.5" />-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            app:layout_constraintGuide_percent="0.5" />
 
         <TextView
             android:id="@+id/tv_upcomingElections"
@@ -35,10 +37,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <RelativeLayout
+            android:id="@+id/rl_loadingPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_noNetwork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:fontFamily="@font/poppins"
+            android:text="@string/connection_error"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_standard"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_upcomingElections" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_upcomingElections"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +87,10 @@
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="@color/violetGray"
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_upcomingElections" />
+            app:layout_constraintTop_toTopOf="@id/guideline" />
 
         <TextView
             android:id="@+id/tv_savedElections"

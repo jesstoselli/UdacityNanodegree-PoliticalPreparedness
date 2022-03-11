@@ -19,6 +19,7 @@
     <string name="zipcode">ZipCode</string>
     <string name="use_my_location">USE MY LOCATION</string>
     <string name="my_representatives">MY REPRESENTATIVES</string>
+    <string name="connection_error">The app has not been able to access this information. Please check your connection.</string>
 
     <!--    Accessibility   -->
     <string name="accessibility_representative_picture">Representative picture</string>

@@ -8,8 +8,6 @@ class CivicsHttpClient : OkHttpClient() {
 
     companion object {
 
-//        const val API_KEY = ""
-
         private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 
         fun getClient(): OkHttpClient {
