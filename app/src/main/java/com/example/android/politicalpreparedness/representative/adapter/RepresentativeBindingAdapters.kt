@@ -1,5 +1,8 @@
 package com.example.android.politicalpreparedness.representative.adapter
 
+import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
@@ -7,10 +10,12 @@ import android.widget.Spinner
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.representative.model.Representative
+import com.google.android.material.textfield.TextInputEditText
 
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {

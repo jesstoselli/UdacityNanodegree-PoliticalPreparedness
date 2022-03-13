@@ -23,8 +23,9 @@ class RepresentativeViewModel(
         get() = _representatives
 
     private val _representativeAddress = MutableLiveData<Address>()
-    val representativeAddress: LiveData<Address>
+    val representativeAddress: MutableLiveData<Address>
         get() = _representativeAddress
+
 
     init {
         _representativeAddress.value = Address("", null, "", "", "")
@@ -62,4 +63,24 @@ class RepresentativeViewModel(
     fun setAddress(address: Address) {
         _representativeAddress.postValue(address)
     }
+
+//    fun setAddressLine1(line1: String) {
+//        _representativeAddress.postValue(representativeAddress.value?.copy(line1 = line1))
+//    }
+//
+//    fun setAddressLine2(line2: String) {
+//        _representativeAddress.postValue(representativeAddress.value?.copy(line2 = line2))
+//    }
+//
+//    fun setAddressCity(city: String) {
+//        _representativeAddress.postValue(representativeAddress.value?.copy(city = city))
+//    }
+//
+//    fun setAddressZipCode(zipCode: String) {
+//        _representativeAddress.postValue(representativeAddress.value?.copy(zip = zipCode))
+//    }
+//
+//    fun setAddressState(state: String) {
+//        _representativeAddress.postValue(representativeAddress.value?.copy(state = state))
+//    }
 }

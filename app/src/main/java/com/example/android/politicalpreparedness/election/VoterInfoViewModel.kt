@@ -9,6 +9,7 @@ import com.example.android.politicalpreparedness.data.PoliticalPreparednessProvi
 import com.example.android.politicalpreparedness.data.network.models.AdministrationBody
 import com.example.android.politicalpreparedness.data.network.models.Division
 import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.election.model.BasicInfo
 import com.example.android.politicalpreparedness.utils.ApiStatus
 import kotlinx.coroutines.launch
 

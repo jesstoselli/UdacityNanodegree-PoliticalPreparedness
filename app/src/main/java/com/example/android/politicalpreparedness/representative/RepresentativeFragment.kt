@@ -47,6 +47,13 @@ class RepresentativeFragment : Fragment() {
 
             rvMyRepresentatives.adapter = RepresentativeListAdapter()
 
+//            viewModel.representativeAddress.observe(viewLifecycleOwner, Observer { address ->
+//                address.line1 = etAddressLine1.text.toString()
+//                address.line2 = etAddressLine2.text.toString()
+//                address.city = etCity.text.toString()
+//                address.zip = etZipcode.text.toString()
+//                address.state = spinnerState.selectedItem.toString()
+//            })
 
             btnSearch.setOnClickListener {
                 hideKeyboard()
@@ -63,15 +70,17 @@ class RepresentativeFragment : Fragment() {
         return binding.root
     }
 
-//    private fun toggleRecyclerViewVisibility() {
+//    private fun keepInfoOnDeviceRotation() {
 //        with(binding) {
-//            if ((rvMyRepresentatives.adapter as RepresentativeListAdapter).itemCount == 0) {
-//                tvLoadingInfo.visibility = View.VISIBLE
-//                rvMyRepresentatives.visibility = View.GONE
-//            } else {
-//                rvMyRepresentatives.visibility = View.VISIBLE
-//                tvLoadingInfo.visibility = View.GONE
-//            }
+//            viewModel.address.observe(viewLifecycleOwner, Observer { address ->
+//                viewModel.setAddressLine1(etAddressLine1.text.toString())
+//
+//                address.line1 = etAddressLine1.text.toString()
+//                address.line2 = etAddressLine2.text.toString()
+//                address.city = etCity.text.toString()
+//                address.zip = etZipcode.text.toString()
+//                address.state = spinnerState.selectedItem.toString()
+//            })
 //        }
 //    }
 

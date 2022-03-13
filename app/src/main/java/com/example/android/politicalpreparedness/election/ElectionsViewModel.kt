@@ -50,7 +50,7 @@ class ElectionsViewModel(
     }
 
     private fun getUpcomingElectionsFromAPI() {
-//        _apiStatus.value = ApiStatus.LOADING
+
         viewModelScope.launch {
             try {
                 val electionsList = politicalPreparednessProvider.getElectionsFromAPI()
