@@ -21,12 +21,12 @@ import com.example.android.politicalpreparedness.representative.adapter.Represen
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class RepresentativeFragment : Fragment() {
 
-    private val viewModel: RepresentativeViewModel by inject()
+    private val viewModel: RepresentativeViewModel by viewModel()
 
     private lateinit var binding: FragmentRepresentativeBinding
 
@@ -47,14 +47,6 @@ class RepresentativeFragment : Fragment() {
 
             rvMyRepresentatives.adapter = RepresentativeListAdapter()
 
-//            viewModel.representativeAddress.observe(viewLifecycleOwner, Observer { address ->
-//                address.line1 = etAddressLine1.text.toString()
-//                address.line2 = etAddressLine2.text.toString()
-//                address.city = etCity.text.toString()
-//                address.zip = etZipcode.text.toString()
-//                address.state = spinnerState.selectedItem.toString()
-//            })
-
             btnSearch.setOnClickListener {
                 hideKeyboard()
                 composeAddress()
@@ -69,20 +61,6 @@ class RepresentativeFragment : Fragment() {
 
         return binding.root
     }
-
-//    private fun keepInfoOnDeviceRotation() {
-//        with(binding) {
-//            viewModel.address.observe(viewLifecycleOwner, Observer { address ->
-//                viewModel.setAddressLine1(etAddressLine1.text.toString())
-//
-//                address.line1 = etAddressLine1.text.toString()
-//                address.line2 = etAddressLine2.text.toString()
-//                address.city = etCity.text.toString()
-//                address.zip = etZipcode.text.toString()
-//                address.state = spinnerState.selectedItem.toString()
-//            })
-//        }
-//    }
 
     private fun snackBarInfoComposer(field: String) {
         Snackbar.make(requireView(), "The field $field must be filled.", Snackbar.LENGTH_LONG).show()
